@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Jenson Xavier">
+    <link rel="stylesheet" type="text/css" href="../static/css/library.css">
+    <script type="text/javascript" src="../static/scripts/jquery.js"></script>
+    <title>浏览图书信息</title>
+</head>
+
+<body>
+    <div class="nav">
+        {% if is_staff %}
+        <a href="/index" class="bookLib">管理员中心</a>
+        {% else %}
+        <a href="/index" class="bookLib">用户中心</a>
+        {% endif %}
+        <a href="/viewbook/?booklikename=&mode=Simple&startpage=1&offset=10" class="bookLib">图书库</a>
+        <a href="/admin" class="bookLib" target="_blank">Django-Administrator</a>
+        <a href="/logout_page" class="bookLib">登出</a>
+    </div>
+    <div class="container">
+        <form class="searchArea" action="/viewbook/" method="get">
+            <input class="inputArea" name="booklikename" type="text" placeholder="请输入要检索的书籍信息"
+                   title="支持输入指定书籍名字所含有的关键字、作者姓名所含有的关键字以及对应书籍出版社所含有的关键字进行检索"/>
+            <input name="mode" value="Simple" type="hidden"/>
+            <input name="startpage" value="1" type="hidden"/>
+            <input name="offset" value="10" type="hidden"/>
+            <button class="searchBtn">检索</button>
+            <div style="font-size: 18px; font-weight: bold; color:yellow;">当前界面展示{{curpageItems}}本图书</div>
+            <div style="font-size: 18px; font-weight: bold; color:yellow;">一共检索到{{allpageItems}}本图书</div>
+        </form>
+        <div class="bookList">
+            {% for book in bookList %}
+                <div class="book">
+                    <div class="hover hid"></div>
+                    <div class="bookMain">
+                        <div>
+                            <input class="id" value={{book.bookId}} type="hidden"/>
+                            <span class="bookName"><strong>图书名称：{{book.bookName}}</strong></span>&nbsp;&nbsp;&nbsp;
+                            <span class="bookType">类别：{{book.bookType}}</span>
+                        </div>
+                        <div>
+                            <span class="bookPublisher">出版社：{{book.bookPublisher}}</span>&nbsp;&nbsp;&nbsp;
+                            <span class="bookAuthor">作者：{{book.bookAuthor}}</span>
+                        </div>
+                        <div>
+                            <span class="bookPrice fail">价格：{{book.bookPrice}}$</span>&nbsp;&nbsp;&nbsp;
+                            {% if book.bookNum %}
+                            <span class="bookNum success">库存：{{book.bookNum}}</span>
+                            {% else %}
+                            <span class="bookNum fail"><strong>0</strong></span>
+                            {% endif %}
+                        </div>
+                        <p class="intro">简介：{{book.bookIntroduction}}</p>
+                    </div>
+                </div>
+                <div></div>
+            {% endfor %}
+        </div>
+        <div class="pageListBox">
+            {% if currentPage != 1 %}
+                <a href="/viewbook/?booklikename={{bookLikeName}}&mode=Simple&startpage={{prevPage}}&offset=10" class="prev pageBtn">上一页</a>
+            {% endif %}
+            {% for i in pageList %}
+                {% if i == currentPage %}
+                <a href="/viewbook/?booklikename={{bookLikeName}}&mode=Simple&startpage={{i}}&offset=10" class="pageBtn active">{{i}}</a>
+                {% else %}
+                <a href="/viewbook/?booklikename={{bookLikeName}}&mode=Simple&startpage={{i}}&offset=10" class="pageBtn">{{i}}</a>
+                {% endif %}
+            {% endfor %}
+            {% if currentPage != endPage %}
+            <a href="/viewbook/?booklikename={{bookLikeName}}&mode=Simple&startpage={{nextPage}}&offset=10" class="next pageBtn">下一页</a>{{page_range}}
+            {% endif %}
+        </div>
+    </div>
+    <script type="text/javascript" src="../static/scripts/library.js"></script>
+</body>
+</html>

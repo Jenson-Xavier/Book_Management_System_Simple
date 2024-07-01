@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="author" content="Jenson Xavier">
+	<link rel="stylesheet" type="text/css" href="../static/css/register.css">
+    <title>用户注册</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="register">
+			<form action='/register/' method="post">
+				<input type="text" name="id" id="id" class="inputArea" placeholder="请输入用户ID" />
+				<input type="password" name="pw" id="pw" class="inputArea" placeholder="请输入密码" />
+				<input type="text" name="name" id="name" class="inputArea" placeholder="请输入用户名" />
+				<select id="sex" name="sex" class="inputArea">
+					<option value="True">男</option>
+					<option value="False">女</option>
+				</select>
+				<input type="text" name="age" id="age" class="inputArea" placeholder="请输入年龄" />
+				<input type="text" name="email" id="email" class="inputArea" placeholder="请输入E-Mail" />
+				<input type="text" name="phone" id="phone" class="inputArea" placeholder="请输入手机号" />
+
+				<button id="submit" class="registerBtn btn" type="submit" >注册</button>
+				<a id="backBtn" class="backBtn btn" href="/login_page" >返回</a>
+				<a href="/admin" class="bookLib" target="_blank" style="text-align: center; font-size: 16px;">Django-Administrator</a>
+				<p class="fail">{{msgFail}}</p>
+				<p class="success">{{msgTrue}}</p>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="../static/scripts/jquery.js"></script>
+</body>
+</html>

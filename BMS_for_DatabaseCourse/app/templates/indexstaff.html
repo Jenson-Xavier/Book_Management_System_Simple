@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Jenson Xavier">
+    <link rel="stylesheet" type="text/css" href="../static/css/indexstaff.css">
+    <script type="text/javascript" src="../static/scripts/jquery.js"></script>
+    <title>管理员主页</title>
+</head>
+
+<body>
+    <div class="nav">
+        {% if is_staff %}
+        <a href="/index" class="bookLib">管理员中心</a>
+        {% else %}
+        <a href="/index" class="bookLib">用户中心</a>
+        {% endif %}
+        <a href="/viewbook/?booklikename=&mode=Simple&startpage=1&offset=10" class="bookLib">图书库</a>
+        <a href="/admin" class="bookLib" target="_blank">Django-Administrator</a>
+        <a href="/logout_page" class="bookLib">登出</a>
+    </div>
+    <div class="moduleLink">
+    </div>
+    <div class="container">
+        <div class="fullPage">
+            <div class="borrow two fontBlue">
+                <h1><strong>借</strong></h1>
+                <div class="line">
+                    <span>bookId :</span><input type="text" id="borrowBookid" placeholder="请输入要借的书籍ID"/>
+                </div>
+                <div class="line">
+                    <span>userId :</span><input type="text" id="borrowUserid" placeholder="请输入要借个的用户ID"/>
+                </div>
+                <button class="borrowBtnCheck Btn">借阅</button>
+                <div class="line"><p class="borrowBookMsg"></p></div>
+            </div>
+            <div class="return two fontBlue">
+                <h1><strong>还</strong></h1>
+                <div class="line">
+                    <span>bookId :</span><input id="returnBookid" type="text" placeholder="请输入要还的书籍ID"/>
+                </div>
+                <div class="line">
+                    <span>userId :</span><input id="returnUserid" type="text" placeholder="请输入要还给的用户ID"/>
+                </div>
+                <button class="returnBtnCheck Btn">还书</button>
+                <div class="line"><p class="returnBookMsg"></p></div>
+            </div>
+        </div>
+        <div class="fullPage">
+            <div class="add two fontBlue">
+                <h1><strong>添加图书数量</strong></h1>
+                <div class="line">
+                    <span>图书编号 :</span><input type="text" id="addBookId" placeholder="请输入要添加数量的书籍ID"/>
+                </div>
+                <div class="line">
+                    <span>数量 :</span><input type="text" id="addBookNum" placeholder="请输入要添加的数量"/>
+                </div>
+                <button class="addBtnCheck Btn">添加</button>
+                <div class="line"><p class="addNumMsg"></p></div>
+            </div>
+            <div class="create two fontBlue">
+                <h1><strong>添加图书</strong></h1>
+                <div class="line">
+                    <span>图书编号 :</span><input type="text" id="createBookId" placeholder="请输入要添加的书籍ID"/>
+                </div>
+                <div class="line">
+                    <span>书名 :</span><input type="text" id="createBookName" placeholder="请输入要添加的书名"/>
+                </div>
+                <div class="line">
+                    <span>类型 :</span>
+                    <select id="createBookType">
+                        {% for typeItem in typeList %}
+                        <option value="{{typeItem.typeNum}}">{{typeItem.typeInfo}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="line">
+                    <span>出版社 :</span><input type="text" id="createBookPub" placeholder="请输入所添加书籍的出版社"/>
+                </div>
+                <div class="line">
+                    <span>作者 :</span><input type="text" id="createBookAuthor" placeholder="请输入书籍的作者姓名"/>
+                </div>
+                <div class="line">
+                    <span>简介 :</span><input type="text" id="createBookIntro" placeholder="请输入所加书籍的简介"/>
+                </div>
+                <div class="line">
+                    <span>价格 :</span><input type="text" id="createBookPrice" placeholder="请输入所加书籍的价格"/>
+                </div>
+                <div class="line">
+                    <span>数量 :</span><input type="text" id="createBookNum" placeholder="请输入添加书籍的数量"/>
+                </div>
+                <button class="createBtnCheck Btn">添加</button>
+                <div class="line"><p class="addBookMsg"></p></div>
+            </div>
+        </div>
+        <div class="fullPage">
+            <div class="changeBook one fontBlue">
+                <div class="line">
+                    <div class="line" style="float:right;">
+                        <input type="text" id="changeBookId" placeholder="请输入要更改的书籍ID"/>
+                        <button class="changeBookBtnCheck Btn">检索</button>
+                        <div class="line"><p class="changeBookCheckMsg"></p></div>
+                    </div>
+                    <h1><strong>更改图书信息</strong></h1>
+                </div>
+                <div class="templateBookContainer"></div>
+                <button class="changeBookBtnSubmit Btn hid">更新</button>
+                <div class="line"><p class="changeBookSubmitMsg"></p></div>
+            </div>
+        </div>
+        <div class="fullPage">
+            <div class="viewUser one fontBlue">
+                <div class="line">
+                    <div class="line" style="float:right;">
+                        <input type="text" id="changeUserName" placeholder="请输入要浏览的用户名"/>
+                        <input type="hidden" id="offset" value="3"/>
+                        <input type="hidden" id="startPage" value="1"/>
+                        <button class="changeUserBtnCheck Btn">检索</button>
+                    </div>
+                    <h1><strong>浏览用户信息</strong></h1>
+                </div>
+                <div class="templateUserContainer"></div>
+                <div class="pageList"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../static/scripts/indexstaff.js"></script>
+</body>
+</html>

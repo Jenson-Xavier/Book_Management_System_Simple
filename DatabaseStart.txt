@@ -1,0 +1,14 @@
+从华为云服务器ECS进入OpenGauss
+1.在主节点服务器上切换至omm操作系统用户环境
+su - omm
+2.启动数据库服务
+gs_om -t start
+3.连接数据库
+gsql -d postgres -p 26000 -r
+gsql -d test -p 26000 -U xjx -W Xjx20030126  -r
+gsql -d db_tpcc -p 26000 -U joe -W Bigdata@123  -r
+gsql -d db_bms -p 26000 -U joe -W Bigdata@123  -r
+·关闭数据库服务
+gs_om -t stop
+·查看服务状态
+gs_om -t status
